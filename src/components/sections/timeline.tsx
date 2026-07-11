@@ -69,7 +69,7 @@ export function JourneyTimeline() {
               {[
                 { name: "Assignix", desc: "Assignment Management Platform (2026)" },
                 { name: "Attendance Tracker", desc: "Academic attendance app (2025)" },
-                { name: "Civic Issue Reporting", desc: "Mobile civic issue reporting app (2025)" },
+                { name: "Civic Resolve", desc: "Civic issue reporting platform (2025)" },
               ].map((proj, i) => (
                 <div key={i} className="flex items-center gap-3 text-sm">
                   <span className="font-mono text-emerald-500 dark:text-cyan-400 font-bold text-xs shrink-0">{String(i + 1).padStart(2, "0")}</span>

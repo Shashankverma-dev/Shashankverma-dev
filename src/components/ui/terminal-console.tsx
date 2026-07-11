@@ -55,7 +55,7 @@ export function TerminalConsole() {
       case "projects":
         newEntries.push({
           type: "output",
-          text: "Project Spotlights:\n1. ASSIGNIX: Assignment Management Platform. Web-based portal designed to organize, track, and manage academic submissions.\n2. CIVIC ISSUE REPORTING SYSTEM: Mobile solution for citizens to report civic issues directly to authorities.\n3. ATTENDANCE TRACKER: Educational utility tracking daily attendance sheets and generating summaries.",
+          text: "Project Spotlights:\n1. ASSIGNIX: Assignment Management Platform. Web-based portal designed to organize, track, and manage academic submissions.\n2. CIVIC RESOLVE: Full-stack platform for citizens to report civic issues directly to authorities.\n3. ATTENDANCE TRACKER: Educational utility tracking daily attendance sheets and generating summaries.",
         });
         break;
       case "skills":
