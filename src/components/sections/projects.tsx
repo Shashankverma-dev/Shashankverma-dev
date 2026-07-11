@@ -39,7 +39,7 @@ const spotlightProjects: SpotlightProject[] = [
     description:
       "Built a full-stack web application that lets citizens report local civic issues directly to authorities. Features role-based dashboards, structured complaint forms, live status tracking, and a geo-tagged map view — all backed by a relational database schema.",
     tech: ["HTML5", "CSS3", "JavaScript", "Python", "SQL", "REST API", "Map Integration"],
-    github: "https://github.com/Shashankverma-dev/civic-reporting",
+    github: "https://github.com/Shashankverma-dev/CivicResolve",
     live: "https://civicresolve.freedev.app/",
     heroImage: "/projects/civic-issue.png",
     heroAlt: "Civic Issue Reporting System — web dashboard and map view",
