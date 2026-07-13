@@ -115,7 +115,7 @@ export function Projects() {
         {/* Section heading */}
         <div className="text-center md:text-left mb-16">
           <p className="font-mono text-xs text-emerald-500 dark:text-cyan-400 uppercase tracking-widest mb-2">
-            // 04. Pinned Repositories
+            {"// 04. Pinned Repositories"}
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-bold">
             Project Spotlights

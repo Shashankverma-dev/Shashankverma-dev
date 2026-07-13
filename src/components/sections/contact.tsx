@@ -67,7 +67,7 @@ export function Contact() {
       } else {
         setErrorMessage(data.error || "Failed to dispatch message.");
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Contact form submission error:", error);
       setErrorMessage("Network error: Failed to connect to secure dispatcher.");
     } finally {
@@ -80,7 +80,7 @@ export function Contact() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center md:text-left mb-16">
           <p className="font-mono text-xs text-emerald-500 dark:text-cyan-400 uppercase tracking-widest mb-2">
-            // 06. Communication Channels
+            {"// 06. Communication Channels"}
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-bold">
             Get In Touch
@@ -93,7 +93,7 @@ export function Contact() {
             <BentoCard className="flex-1 flex flex-col justify-between" hoverGlow="green">
               <div>
                 <h3 className="font-display text-2xl font-bold mb-4">
-                  Let's collaborate on premium web products.
+                  {"Let's collaborate on premium web products."}
                 </h3>
                 <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-6">
                   I am always open to discussing fullstack roles, software engineering contracts, 
@@ -123,7 +123,7 @@ export function Contact() {
               {/* Social Channels Link Row */}
               <div>
                 <p className="font-mono text-xs text-zinc-400 uppercase tracking-widest mb-3">
-                  // external_nodes
+                  {"// external_nodes"}
                 </p>
                 <div className="flex items-center space-x-4">
                   <a

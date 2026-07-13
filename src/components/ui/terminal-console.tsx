@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { Terminal as TerminalIcon, Play, RefreshCw } from "lucide-react";
+import { Terminal as TerminalIcon, RefreshCw } from "lucide-react";
 
 interface LogEntry {
   type: "input" | "output" | "error";
@@ -15,7 +15,7 @@ export function TerminalConsole() {
     { type: "output", text: "(c) 2026 Shashank Verma. All rights reserved." },
     { type: "output", text: "Type 'help' to see available commands or click quick actions below." },
   ]);
-  const [isActive, setIsActive] = useState(true);
+  const isActive = true;
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 

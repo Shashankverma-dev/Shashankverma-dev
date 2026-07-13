@@ -73,10 +73,11 @@ export async function POST(req: Request) {
     await transporter.sendMail(mailOptions);
 
     return NextResponse.json({ success: true, message: "Email sent successfully!" });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error in contact API route:", error);
+    const errorMessage = error instanceof Error ? error.message : "Failed to send email.";
     return NextResponse.json(
-      { error: error.message || "Failed to send email." },
+      { error: errorMessage },
       { status: 500 }
     );
   }

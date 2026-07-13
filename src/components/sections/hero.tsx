@@ -39,7 +39,7 @@ export function Hero({ isLoaded = true }: HeroProps) {
               initial={{ pathLength: 0, opacity: 0 }}
               animate={isLoaded ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
               transition={{
-                pathLength: { duration: 3, ease: [0.43, 0.13, 0.23, 0.96] as any },
+                pathLength: { duration: 3, ease: [0.43, 0.13, 0.23, 0.96] as [number, number, number, number] },
                 opacity: { duration: 0.5 }
               }}
             />

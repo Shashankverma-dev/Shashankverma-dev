@@ -71,7 +71,7 @@ export function Certifications() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center md:text-left mb-16">
           <p className="font-mono text-xs text-emerald-500 dark:text-cyan-400 uppercase tracking-widest mb-2">
-            // 05. Credentials & Milestones
+            {"// 05. Credentials & Milestones"}
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-bold">
             Certifications & Accomplishments

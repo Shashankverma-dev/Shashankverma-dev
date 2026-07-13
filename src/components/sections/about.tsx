@@ -2,7 +2,7 @@
 
 import React from "react";
 import { BentoCard } from "../ui/bento-card";
-import { User, Cpu, Award, Zap, Code2, Globe, Heart } from "lucide-react";
+import { User, Cpu, Zap, Code2, Heart } from "lucide-react";
 
 export function About() {
   const stats = [
@@ -17,7 +17,7 @@ export function About() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center md:text-left mb-16">
           <p className="font-mono text-xs text-emerald-500 dark:text-cyan-400 uppercase tracking-widest mb-2">
-            // 01. Profile Summary
+            {"// 01. Profile Summary"}
           </p>
           <h2 className="font-display text-3xl md:text-4xl font-bold">
             About Myself

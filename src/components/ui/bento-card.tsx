@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, useEffect, useRef } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -50,9 +50,23 @@ export function BentoCard({
   const particlesRef = useRef<Particle[]>([]);
   const mousePosRef = useRef({ x: 0, y: 0 });
   const animationFrameRef = useRef<number | undefined>(undefined);
+  const isLoopRunningRef = useRef(false);
+  const animateRef = useRef<() => void>(undefined);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if (!enableSmoke) return;
+    const checkMobile = () => {
+      const hasTouch = window.matchMedia("(pointer: coarse)").matches;
+      const isSmallScreen = window.innerWidth < 768;
+      setIsMobile(hasTouch || isSmallScreen);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (!enableSmoke || isMobile) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     
@@ -66,25 +80,28 @@ export function BentoCard({
     else if (hoverGlow === "violet") particleColor = "139, 92, 246";
 
     const animate = () => {
+      if (!canvas || !ctx) {
+        isLoopRunningRef.current = false;
+        return;
+      }
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
       // Update particles
       particlesRef.current = particlesRef.current
-        .filter(particle => particle.life > 0 && particle.size > 0)
-        .map(particle => {
-          particle.update();
-          
-          // Draw particle
-          if (particle.size > 0) {
-            const opacity = (particle.life / 120) * 0.12; // Softer opacity for larger clouds
-            ctx.fillStyle = `rgba(${particleColor}, ${opacity})`;
-            ctx.beginPath();
-            ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-            ctx.fill();
-          }
-          
-          return particle;
-        });
+        .filter(particle => particle.life > 0 && particle.size > 0);
+
+      particlesRef.current.forEach(particle => {
+        particle.update();
+        
+        // Draw particle
+        if (particle.size > 0) {
+          const opacity = (particle.life / 120) * 0.12; // Softer opacity for larger clouds
+          ctx.fillStyle = `rgba(${particleColor}, ${opacity})`;
+          ctx.beginPath();
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      });
 
       // Add new particles near mouse position
       if (mousePosRef.current.x !== 0 && mousePosRef.current.y !== 0) {
@@ -98,8 +115,15 @@ export function BentoCard({
         }
       }
 
-      animationFrameRef.current = requestAnimationFrame(animate);
+      if (particlesRef.current.length > 0 || (mousePosRef.current.x !== 0 && mousePosRef.current.y !== 0)) {
+        animationFrameRef.current = requestAnimationFrame(animate);
+      } else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        isLoopRunningRef.current = false;
+      }
     };
+
+    animateRef.current = animate;
 
     // Set initial canvas size
     const updateCanvasSize = () => {
@@ -115,18 +139,19 @@ export function BentoCard({
     });
     
     resizeObserver.observe(canvas.parentElement || canvas);
-    animate();
 
     return () => {
       resizeObserver.disconnect();
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
+      isLoopRunningRef.current = false;
+      animateRef.current = undefined;
     };
-  }, [enableSmoke, hoverGlow]);
+  }, [enableSmoke, hoverGlow, isMobile]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!enableSmoke) return;
+    if (!enableSmoke || isMobile) return;
     const rect = canvasRef.current?.getBoundingClientRect();
     if (!rect) return;
     
@@ -134,10 +159,15 @@ export function BentoCard({
       x: e.clientX - rect.left,
       y: e.clientY - rect.top
     };
+
+    if (!isLoopRunningRef.current && animateRef.current) {
+      isLoopRunningRef.current = true;
+      animateRef.current();
+    }
   };
 
   const handleMouseLeave = () => {
-    if (!enableSmoke) return;
+    if (!enableSmoke || isMobile) return;
     mousePosRef.current = { x: 0, y: 0 };
   };
   
@@ -159,12 +189,12 @@ export function BentoCard({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative overflow-hidden rounded-xl border border-zinc-200 bg-white p-6 transition-all duration-300 dark:border-zinc-900 dark:bg-zinc-950/40 backdrop-blur-sm",
+        "relative overflow-hidden rounded-xl border border-zinc-200 bg-white p-6 transition-all duration-300 dark:border-zinc-900/60 dark:bg-zinc-950/40 backdrop-blur-sm",
         glowClass,
         className
       )}
     >
-      {enableSmoke && (
+      {enableSmoke && !isMobile && (
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full pointer-events-none z-0"

@@ -44,7 +44,7 @@ export function JourneyTimeline() {
 
           {/* Focus Areas */}
           <div className="mb-6">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-3">// Core Focus Areas</p>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-3">{"// Core Focus Areas"}</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {[
                 "Data Science & Analytics",
@@ -64,7 +64,7 @@ export function JourneyTimeline() {
 
           {/* Projects Built */}
           <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-3">// Projects Built During BCA</p>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-3">{"// Projects Built During BCA"}</p>
             <div className="space-y-2">
               {[
                 { name: "Assignix", desc: "Assignment Management Platform (2026)" },
@@ -189,7 +189,7 @@ export function JourneyTimeline() {
       {/* Section Header */}
       <div className="max-w-7xl mx-auto px-6 pt-20 pb-4">
         <p className="font-mono text-xs text-emerald-500 dark:text-cyan-400 uppercase tracking-widest mb-2">
-          // 03. Academic Milestones
+          {"// 03. Academic Milestones"}
         </p>
         <h2 className="font-display text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-50">
           Education History
