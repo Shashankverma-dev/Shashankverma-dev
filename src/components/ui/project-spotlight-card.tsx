@@ -335,52 +335,9 @@ export function ProjectSpotlightCard({
               {project.description}
             </p>
 
-            {/* Meta grid — only rendered when at least one meta value exists */}
-            {(project.season || project.rating !== undefined || project.seats) && (
-              <div className="grid grid-cols-3 gap-4 mb-7 max-w-md">
-                {project.season && (
-                  <div>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1">
-                      Season
-                    </p>
-                    <p className="text-sm text-zinc-200">{project.season}</p>
-                  </div>
-                )}
-                {project.rating !== undefined && (
-                  <div>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1">
-                      Rating
-                    </p>
-                    <div className="flex items-center gap-1 text-sm text-zinc-200">
-                      {project.rating}
-                      <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-                    </div>
-                  </div>
-                )}
-                {project.seats && (
-                  <div>
-                    <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1">
-                      Stack size
-                    </p>
-                    <p className="text-sm text-zinc-200">{project.seats}</p>
-                  </div>
-                )}
-              </div>
-            )}
 
-            {/* Tech tags */}
-            {project.tech.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mb-7">
-                {project.tech.map((tc) => (
-                  <span
-                    key={tc}
-                    className="font-mono text-[9px] px-2 py-0.5 rounded border border-white/[0.12] bg-white/[0.04] backdrop-blur-sm text-zinc-400"
-                  >
-                    {tc}
-                  </span>
-                ))}
-              </div>
-            )}
+
+
 
             {/* Price / status + CTA */}
             <div className="flex items-end justify-between gap-4 flex-wrap">

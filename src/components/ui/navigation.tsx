@@ -48,11 +48,11 @@ export function Navigation() {
   }, []);
 
   const navLinks = [
-    { label: "about", href: "#about" },
-    { label: "skills", href: "#skills" },
-    { label: "journey", href: "#journey" },
-    { label: "projects", href: "#projects" },
-    { label: "contact", href: "#contact" },
+    { label: "About", href: "#about" },
+    { label: "Skills", href: "#skills" },
+    { label: "Journey", href: "#journey" },
+    { label: "Projects", href: "#projects" },
+    { label: "Contact", href: "#contact" },
   ];
 
   return (
@@ -60,26 +60,26 @@ export function Navigation() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
           ? "bg-white/80 dark:bg-black/80 border-b border-zinc-150 dark:border-zinc-900/60 backdrop-blur-md py-4" 
-          : "bg-transparent py-6"
+          : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Monospace Logo */}
         <a 
           href="#" 
-          className="flex items-center space-x-2 font-mono text-sm font-bold tracking-tight text-zinc-900 dark:text-zinc-50 group"
+          className="flex items-center space-x-2.5 font-mono text-base font-bold tracking-tight text-zinc-900 dark:text-zinc-50 group"
         >
-          <Terminal className="w-4 h-4 text-emerald-500 group-hover:rotate-6 transition-transform" />
+          <Terminal className="w-5 h-5 text-emerald-500 group-hover:rotate-6 transition-transform" />
           <span>shashank.dev()</span>
         </a>
 
         {/* Desktop Navigation Link Nodes */}
-        <nav className="hidden md:flex items-center space-x-8 font-mono text-xs">
+        <nav className="hidden md:flex items-center space-x-8 font-mono text-sm font-medium tracking-wide">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-zinc-500 hover:text-emerald-500 dark:text-zinc-400 dark:hover:text-cyan-400 transition-colors relative py-1 group"
+              className="text-zinc-500 hover:text-emerald-500 dark:text-zinc-400 dark:hover:text-cyan-400 transition-colors relative py-1.5 group"
             >
               <span>{link.label}</span>
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 dark:bg-cyan-400 group-hover:w-full transition-all duration-300" />
@@ -88,7 +88,7 @@ export function Navigation() {
         </nav>
 
         {/* Desktop Action Utilities (Theme, Socials) */}
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="hidden md:flex items-center space-x-5">
           <a
             href="https://github.com/Shashankverma-dev"
             target="_blank"
@@ -96,7 +96,7 @@ export function Navigation() {
             className="text-zinc-500 hover:text-emerald-500 dark:text-zinc-400 dark:hover:text-cyan-400 transition-colors"
             title="GitHub"
           >
-            <GithubIcon className="w-4 h-4" />
+            <GithubIcon className="w-5 h-5" />
           </a>
           <a
             href="https://www.linkedin.com/in/shashank-verma-dev/"
@@ -105,7 +105,7 @@ export function Navigation() {
             className="text-zinc-500 hover:text-emerald-500 dark:text-zinc-400 dark:hover:text-cyan-400 transition-colors"
             title="LinkedIn"
           >
-            <LinkedinIcon className="w-4 h-4" />
+            <LinkedinIcon className="w-5 h-5" />
           </a>
           <ThemeToggle />
         </div>

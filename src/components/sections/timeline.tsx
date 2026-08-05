@@ -2,10 +2,96 @@
 
 import React from "react";
 import { Timeline } from "@/components/ui/timeline-aceternity";
-import { GraduationCap, BookOpen, CheckCircle2, MapPin, Calendar } from "lucide-react";
+import { GraduationCap, BookOpen, CheckCircle2, MapPin, Calendar, Briefcase, ExternalLink } from "lucide-react";
 
 export function JourneyTimeline() {
   const data = [
+    {
+      title: "2025 – 2026",
+      content: (
+        <div>
+          {/* Header */}
+          <div className="flex items-start gap-3 mb-5">
+            <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/20 shrink-0">
+              <Briefcase className="w-5 h-5 text-amber-500" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <h4 className="font-display text-lg font-bold text-zinc-900 dark:text-zinc-50">
+                  Web Developer Intern
+                </h4>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 uppercase tracking-wider">
+                  Internship
+                </span>
+              </div>
+              <a
+                href="https://eduroamglobal.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-xs text-amber-500 hover:text-amber-400 transition-colors mt-0.5 flex items-center gap-1 group"
+              >
+                EduRoam Global
+                <ExternalLink className="w-3 h-3 opacity-60 group-hover:opacity-100 transition-opacity" />
+              </a>
+            </div>
+          </div>
+
+          {/* Meta */}
+          <div className="flex flex-wrap gap-4 mb-5 text-xs font-mono text-zinc-500">
+            <span className="flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-amber-500" /> Chandigarh, India
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-amber-500" /> 2025 – 2026 · 2 Months
+            </span>
+          </div>
+
+          {/* Description */}
+          <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-6">
+            Led the end-to-end redesign and redevelopment of the EduRoam Global website —
+            a platform for international students seeking global study opportunities.
+            Rebuilt the entire frontend from scratch, modernized the UI/UX, integrated
+            dynamic PHP backends, and deployed a polished, production-ready product within 2 months.
+          </p>
+
+          {/* What I did */}
+          <div className="mb-6">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-3">{"// Key Contributions"}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {[
+                "HTML, CSS & JavaScript frontend",
+                "PHP backend & form handling",
+                "Careers & contact system",
+                "Admin panel development",
+                "Responsive & mobile-first design",
+                "SEO & performance optimization",
+                "Production deployment",
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-300">
+                  <CheckCircle2 className="w-4 h-4 text-amber-500 shrink-0" />
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Tech stack */}
+          <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800">
+            <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400 mb-3">{"// Tech Stack"}</p>
+            <div className="flex flex-wrap gap-2">
+              {["HTML5", "CSS3", "JavaScript", "PHP", "GSAP", "React", "Vite", "Tailwind CSS", "MySQL"].map((tech) => (
+                <span
+                  key={tech}
+                  className="text-[10px] font-mono px-2.5 py-1 rounded-full bg-amber-500/8 border border-amber-500/20 text-amber-600 dark:text-amber-400"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ),
+    },
     {
       title: "2024 – Now",
       content: (
@@ -189,14 +275,14 @@ export function JourneyTimeline() {
       {/* Section Header */}
       <div className="max-w-7xl mx-auto px-6 pt-20 pb-4">
         <p className="font-mono text-xs text-emerald-500 dark:text-cyan-400 uppercase tracking-widest mb-2">
-          {"// 03. Academic Milestones"}
+          {"// 03. Experience & Education"}
         </p>
         <h2 className="font-display text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-50">
-          Education History
+          My Journey
         </h2>
         <p className="mt-3 text-zinc-500 dark:text-zinc-400 text-sm max-w-xl">
-          My academic journey from secondary school through university, building skills in
-          software development, data science, and computing.
+          From high school to a real-world internship — my path through education, hands-on work,
+          and building production software.
         </p>
       </div>
 

@@ -103,6 +103,29 @@ const spotlightProjects: SpotlightProject[] = [
     seats: "Unlimited",
     coords: ["12.97° N", "77.59° E"],
   },
+  {
+    id: "artndus",
+    name: "Artndus",
+    category: "E-Commerce & Brand Website",
+    tagline: "Handmade Gifts Online Store — Dehradun",
+    description:
+      "Designed and developed the official website for Artndus (@art.nd.us), a Dehradun-based brand specializing in handmade pipe cleaner bouquets, plush flower pots, keychains, and custom gift hampers. Built a fully branded, SEO-optimized storefront with pan-India shipping support.",
+    tech: ["HTML5", "CSS3", "JavaScript", "SEO", "Responsive Design", "Vite"],
+    live: "https://artndus.in/",
+    heroImage: "/projects/artndus.png",
+    heroAlt: "Artndus — handmade pipe cleaner flowers & bouquets store",
+    highlights: [
+      "Built a fully branded storefront for an Instagram-native handmade gifts business.",
+      "Implemented advanced SEO meta tags, Open Graph, geo-targeting, and sitemap for discoverability.",
+      "Designed a mobile-first, visually rich layout to showcase handcrafted products.",
+      "Enabled pan-India shipping integration and WhatsApp-based order routing.",
+    ],
+    availabilityLabel: "Live",
+    season: "Year-Round",
+    rating: 4.8,
+    seats: "Pan-India",
+    coords: ["30.32° N", "78.03° E"],
+  },
 ];
 
 export function Projects() {
