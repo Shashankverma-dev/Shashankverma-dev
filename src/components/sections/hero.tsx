@@ -108,8 +108,8 @@ export function Hero({ isLoaded = true }: HeroProps) {
           Hardworking BCA student at{" "}
           <span className="font-semibold text-zinc-800 dark:text-zinc-100">Swami Rama Himalayan University</span>{" "}
           focused on Software Development, Data Science, and Web Technologies. Creator of{" "}
-          <span className="font-mono text-emerald-500 dark:text-cyan-400 font-semibold">Assignix</span>
-          —an assignment management platform.
+          <span className="font-mono text-emerald-500 dark:text-cyan-400 font-semibold">Rateme</span>
+          —a review collection platform.
         </motion.p>
 
         {/* Call to Actions */}

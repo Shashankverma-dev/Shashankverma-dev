@@ -20,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Shashank Verma | BCA Student & Programmer",
-  description: "Portfolio of Shashank Verma - BCA student at Swami Rama Himalayan University specializing in Software Development, Data Science, and Web Technologies. Creator of Assignix.",
+  description: "Portfolio of Shashank Verma - BCA student at Swami Rama Himalayan University specializing in Software Development, Data Science, and Web Technologies. Creator of Rateme—a review collection platform.",
   keywords: ["Shashank Verma", "BCA student", "Swami Rama Himalayan University", "Software Development", "Data Science", "Assignix", "Web Technologies", "Programmer Portfolio"],
   authors: [{ name: "Shashank Verma" }],
   openGraph: {
