@@ -51,6 +51,7 @@ export function Navigation() {
     { label: "About", href: "#about" },
     { label: "Skills", href: "#skills" },
     { label: "Journey", href: "#journey" },
+    { label: "Certifications", href: "#certifications" },
     { label: "Projects", href: "#projects" },
     { label: "Contact", href: "#contact" },
   ];

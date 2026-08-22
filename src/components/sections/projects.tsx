@@ -8,6 +8,39 @@ import {
 
 const spotlightProjects: SpotlightProject[] = [
   {
+    id: "aura-social",
+    name: "Aura Social",
+    category: "Interactive 3D Web & Creative Agency",
+    tagline: "3D Scroll-Driven Storytelling Platform",
+    description:
+      "A modern, high-performance agency showcase website built with Next.js 15, React 19, GSAP, and Tailwind CSS. Features custom interactive 3D smartphone scroll-driven story transitions, smooth dynamic canvas frame sequences, and glassmorphism agency UI.",
+    tech: [
+      "Next.js 15",
+      "React 19",
+      "GSAP",
+      "Lenis Scroll",
+      "Tailwind CSS",
+      "TypeScript",
+      "Framer Motion",
+    ],
+    github: "https://github.com/Shashankverma-dev/Aura-social",
+    live: "https://aura-social.rockverma9917.workers.dev/",
+    heroImage: "/projects/aura-social.png",
+    heroAlt: "Aura Social — interactive 3D scroll animation website",
+    heroPosition: "center",
+    highlights: [
+      "Engineered interactive 3D smartphone scroll stories transforming phone mockups into live feature interfaces.",
+      "Integrated Lenis inertial smooth scrolling with GSAP ScrollTrigger timeline sequences.",
+      "Designed modern floating glassmorphism navigation, vibrant neon gradients, and micro-interactions.",
+      "Optimized with Next.js 15 App Router & React 19 for 60fps fluid performance across all devices.",
+    ],
+    availabilityLabel: "Live",
+    season: "2025 – Now",
+    rating: 5.0,
+    seats: "Agency Grade",
+    coords: ["28.61° N", "77.20° E"],
+  },
+  {
     id: "assignix",
     name: "Assignix",
     category: "Academic & Web Utility",

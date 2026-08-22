@@ -64,29 +64,19 @@ export function Hero({ isLoaded = true }: HeroProps) {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-emerald-500/5 dark:bg-cyan-500/5 blur-3xl pointer-events-none" />
 
       <div className="w-full max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
-        {/* Available Badge */}
+        {/* Available for Work Status Badge */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={isLoaded ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, y: -10 }}
+          animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-emerald-600 dark:text-emerald-400 text-xs font-mono mb-8"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-100/90 dark:bg-zinc-900/90 border border-zinc-200/80 dark:border-zinc-800 shadow-sm backdrop-blur-md text-xs font-medium text-zinc-700 dark:text-zinc-300 mb-8 select-none hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
         >
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
           </span>
-          <span>Available for Internships & Collaboration</span>
+          <span className="font-sans">Available for internships &amp; new opportunities</span>
         </motion.div>
-
-        {/* Catchy Monospace Intro */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="font-mono text-zinc-500 dark:text-zinc-400 text-xs tracking-wider uppercase mb-3"
-        >
-          &lt;developer_profile&gt;
-        </motion.p>
 
         {/* Title / Name */}
         <motion.h1
