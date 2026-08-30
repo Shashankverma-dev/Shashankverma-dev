@@ -340,26 +340,28 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     },
   },
 
-  // 13. Nancy International School - Computer Wizard Award
+  // 13. Computer Wizard Academic Award - Nancy International School
   {
-    id: "nancy-computer-wizard",
-    title: "Computer Wizard Academic Achievement",
+    id: "computer-wizard-award",
+    title: "Computer Wizard Academic Honor (Class XII Sci)",
     issuer: "Nancy International School",
     issueDate: "Nov 2023",
     year: 2023,
-    category: "Other",
+    category: "Programming",
     verified: true,
-    credentialId: "NIS-CW-2023-24",
+    credentialId: "NIS-CW-2023",
     filePath: "/certifications/computer wizard.jpg",
     previewImage: "/certifications/previews/computer_wizard.jpg",
-    skills: ["Computer Science", "Academic Excellence", "Leadership", "Technical Aptitude"],
-    description: "Recognized as the Annual 'Computer Wizard' for outstanding technical talent, logic aptitude, and leadership in computer science during academic session 2023-2024.",
+    skills: ["Computer Science", "Academic Excellence", "Practical Lab", "Problem Solving"],
+    description: "Awarded 'Computer Wizard' honor at the 17th Annual Day Celebration during the academic session 2023-2024 for outstanding performance in Computer Science.",
     badgeStyle: {
       type: "gold-crest",
-      badgeText: "NIS",
-      subText: "Wizard Award",
+      badgeText: "NIS Honor",
+      subText: "Computer Wizard",
       primaryColor: "#eab308",
       accentColor: "#ca8a04",
     },
   },
 ];
+
+

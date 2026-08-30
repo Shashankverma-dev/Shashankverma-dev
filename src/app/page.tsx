@@ -46,7 +46,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col min-h-screen relative selection:bg-emerald-500/20 selection:text-emerald-500">
-      {/* Cyberpunk Starting Screen Loader */}
+      {/* Starting Screen Loader */}
       <AnimatePresence mode="wait">
         {loading && (
           <motion.div
@@ -92,5 +92,3 @@ export default function Home() {
     </div>
   );
 }
-
-

@@ -1,98 +1,27 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { BentoCard } from "../ui/bento-card";
-import { InteractiveRobotSpline } from "../ui/interactive-3d-robot";
-import { Terminal, Database, Layout, Settings, Cpu } from "lucide-react";
-
-interface SkillItem {
-  name: string;
-  level: "Advanced" | "Intermediate" | "Familiar";
-}
-
-interface SkillCategory {
-  title: string;
-  icon: React.ReactNode;
-  color: "cyan" | "green" | "violet";
-  skills: SkillItem[];
-}
-
-function TerminalVisualizerFallback() {
-  return (
-    <div className="absolute inset-0 w-full h-full bg-[#030303] flex flex-col justify-between p-6 font-mono select-none">
-      {/* Background grid */}
-      <div className="absolute inset-0 terminal-grid-dark opacity-35 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-emerald-500/5 blur-3xl pointer-events-none" />
-
-      {/* Top Bar */}
-      <div className="flex items-center justify-between border-b border-zinc-900 pb-3 z-10">
-        <div className="flex items-center space-x-2">
-          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 animate-pulse" />
-          <span className="text-[10px] text-zinc-400 uppercase tracking-widest">System Core: Whobee v1.0.4</span>
-        </div>
-        <span className="text-[9px] px-2 py-0.5 rounded border border-emerald-500/20 bg-emerald-500/5 text-emerald-450 uppercase">
-          Optimized 2D Mode
-        </span>
-      </div>
-
-      {/* Graphics */}
-      <div className="flex-grow flex flex-col justify-center items-center py-4 z-10">
-        <div className="relative w-32 h-32 flex items-center justify-center mb-5">
-          {/* Animated rings */}
-          <div className="absolute inset-0 rounded-full border border-emerald-500/10 animate-ping" style={{ animationDuration: "3s" }} />
-          <div className="absolute inset-2 rounded-full border border-dashed border-emerald-500/30 animate-spin" style={{ animationDuration: "25s" }} />
-          <div className="absolute inset-5 rounded-full border border-emerald-500/20 bg-zinc-950/90 flex items-center justify-center">
-            <Cpu className="w-8 h-8 text-emerald-400 animate-pulse" />
-          </div>
-        </div>
-
-        <div className="text-center max-w-xs">
-          <h4 className="text-xs font-bold text-zinc-200 mb-1.5 uppercase tracking-wide">3D Canvas Suspended</h4>
-          <p className="text-[11px] text-zinc-500 leading-relaxed px-2">
-            Whobee 3D sandbox is suspended on mobile and touch devices to reduce latency, memory overhead, and optimize battery drain.
-          </p>
-        </div>
-      </div>
-
-      {/* Footer stats */}
-      <div className="grid grid-cols-3 gap-2 border-t border-zinc-900 pt-3 z-10 text-center">
-        <div>
-          <span className="block text-[8px] uppercase tracking-wider text-zinc-600">Core status</span>
-          <span className="text-[11px] font-semibold text-emerald-400">ACTIVE</span>
-        </div>
-        <div>
-          <span className="block text-[8px] uppercase tracking-wider text-zinc-600">Engine</span>
-          <span className="text-[11px] font-semibold text-zinc-400">LIGHT</span>
-        </div>
-        <div>
-          <span className="block text-[8px] uppercase tracking-wider text-zinc-600">FPS TARGET</span>
-          <span className="text-[11px] font-semibold text-zinc-400">60 FPS</span>
-        </div>
-      </div>
-    </div>
-  );
-}
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { 
+  Layout, 
+  Database, 
+  FileText, 
+  Camera, 
+  Terminal,
+  ArrowUpRight
+} from "lucide-react";
 
 export function Skills() {
-  const ROBOT_SCENE_URL = "https://prod.spline.design/PyzDhpQ9E5f1E3MT/scene.splinecode";
-  const [isMobile, setIsMobile] = useState(true);
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      const isTouch = window.matchMedia("(pointer: coarse)").matches;
-      const isSmall = window.innerWidth < 768;
-      setIsMobile(isTouch || isSmall);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const categories: SkillCategory[] = [
+  const skillCategories = [
     {
-      title: "Programming",
-      icon: <Terminal className="w-5 h-5" />,
-      color: "green",
+      id: "programming",
+      index: "01",
+      title: "PROGRAMMING",
+      icon: <Terminal className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />,
+      accentColor: "#10b981",
+      badgeColor: "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-400 dark:border-emerald-500/30",
       skills: [
         { name: "C Language", level: "Familiar" },
         { name: "Python", level: "Familiar" },
@@ -100,9 +29,12 @@ export function Skills() {
       ],
     },
     {
-      title: "Web Development",
-      icon: <Layout className="w-5 h-5" />,
-      color: "cyan",
+      id: "web",
+      index: "02",
+      title: "WEB DEVELOPMENT",
+      icon: <Layout className="w-4 h-4 text-sky-600 dark:text-cyan-400" />,
+      accentColor: "#0ea5e9",
+      badgeColor: "bg-sky-50 text-sky-700 border-sky-200 dark:bg-cyan-950/60 dark:text-cyan-400 dark:border-cyan-500/30",
       skills: [
         { name: "HTML5", level: "Familiar" },
         { name: "CSS3", level: "Familiar" },
@@ -110,111 +42,168 @@ export function Skills() {
       ],
     },
     {
-      title: "Database Management",
-      icon: <Database className="w-5 h-5" />,
-      color: "violet",
+      id: "database",
+      index: "03",
+      title: "DATABASE",
+      icon: <Database className="w-4 h-4 text-purple-600 dark:text-purple-400" />,
+      accentColor: "#a855f7",
+      badgeColor: "bg-purple-50 text-purple-700 border-purple-200 dark:bg-purple-950/60 dark:text-purple-400 dark:border-purple-500/30",
       skills: [
         { name: "SQL Basics", level: "Familiar" },
         { name: "Relational DBs", level: "Familiar" },
       ],
     },
     {
-      title: "Office Tech & Media",
-      icon: <Settings className="w-5 h-5" />,
-      color: "green",
+      id: "office",
+      index: "04",
+      title: "OFFICE TOOLS",
+      icon: <FileText className="w-4 h-4 text-amber-600 dark:text-amber-400" />,
+      accentColor: "#f59e0b",
+      badgeColor: "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-950/60 dark:text-amber-400 dark:border-amber-500/30",
       skills: [
         { name: "MS Word / PPT", level: "Intermediate" },
         { name: "MS Excel", level: "Intermediate" },
+      ],
+    },
+    {
+      id: "digital",
+      index: "05",
+      title: "DIGITAL & MEDIA",
+      icon: <Camera className="w-4 h-4 text-pink-600 dark:text-pink-400" />,
+      accentColor: "#ec4899",
+      badgeColor: "bg-pink-50 text-pink-700 border-pink-200 dark:bg-pink-950/60 dark:text-pink-400 dark:border-pink-500/30",
+      skills: [
         { name: "Social Media Platforms", level: "Familiar" },
+        { name: "Canva (Basic)", level: "Familiar" },
       ],
     },
   ];
 
   return (
-    <section id="skills" className="py-24 relative border-t border-zinc-100 dark:border-zinc-900/60 bg-zinc-50/30 dark:bg-zinc-950/20">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center md:text-left mb-16">
-          <p className="font-mono text-xs text-emerald-500 dark:text-cyan-400 uppercase tracking-widest mb-2">
-            {"// 02. Technical Capabilities"}
-          </p>
-          <h2 className="font-display text-3xl md:text-4xl font-bold">
-            Skills Inventory
-          </h2>
-        </div>
+    <section 
+      id="skills" 
+      className="w-full min-h-screen relative bg-[#ffffff] dark:bg-[#090b10] text-zinc-950 dark:text-[#f3f4f6] transition-colors duration-500 font-sans border-t border-zinc-200/90 dark:border-zinc-800/90 overflow-hidden flex flex-col justify-center"
+    >
+      {/* Top Right Terminal Prompt Badge */}
+      <div className="absolute top-6 right-6 sm:top-8 sm:right-10 z-30 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-700/80 text-emerald-600 dark:text-emerald-400 text-xs font-mono select-none shadow-xs">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
+        <span>&gt;_</span>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((cat, idx) => {
-            const glowColor = cat.color;
-            const iconColorClass = 
-              glowColor === "cyan" 
-                ? "text-cyan-500" 
-                : glowColor === "green" 
-                ? "text-emerald-500" 
-                : "text-violet-500";
+      {/* Edge-to-Edge Full Screen Split Grid */}
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-screen">
+        
+        {/* ================= LEFT HALF: EDITORIAL TECHNICAL MATRIX ================= */}
+        <div className="lg:col-span-7 xl:col-span-7 px-6 sm:px-12 lg:px-16 xl:px-24 py-12 lg:py-16 flex flex-col justify-between relative z-20">
+          
+          {/* Header */}
+          <div className="mb-8">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="font-mono text-xs font-bold tracking-widest text-emerald-600 dark:text-emerald-400 uppercase">
+                {"// 02. TECHNICAL CAPABILITIES"}
+              </span>
+            </div>
 
-            return (
-              <BentoCard 
-                key={idx} 
-                className="flex flex-col justify-between h-full" 
-                hoverGlow={glowColor}
-                delay={idx * 0.05}
-              >
-                <div>
-                  {/* Category Header */}
-                  <div className="flex items-center space-x-3 mb-6">
-                    <span className={iconColorClass}>{cat.icon}</span>
-                    <h3 className="font-mono text-sm uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
-                      {cat.title}
-                    </h3>
-                  </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-[48px] font-black text-zinc-950 dark:text-white tracking-tight leading-tight mb-2">
+              Skills Inventory
+            </h2>
 
-                  {/* Skills List */}
-                  <div className="space-y-4">
-                    {cat.skills.map((skill, sIdx) => (
-                      <div 
-                        key={sIdx} 
-                        className="flex flex-col border-b border-zinc-100 dark:border-zinc-900/50 pb-2.5 last:border-0 last:pb-0"
-                      >
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="font-medium text-zinc-800 dark:text-zinc-200">
+            <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm leading-relaxed max-w-xl">
+              A curated set of tools, technologies, and skills I use to build, solve, and create.
+            </p>
+          </div>
+
+          {/* ================= EDITORIAL DIVIDER ROWS (NO BOX CARDS) ================= */}
+          <div className="divide-y divide-zinc-200/90 dark:divide-zinc-800/90 border-y border-zinc-200/90 dark:border-zinc-800/90 my-auto">
+            {skillCategories.map((cat) => {
+              const isHovered = hoveredCategory === cat.id;
+
+              return (
+                <div
+                  key={cat.id}
+                  onMouseEnter={() => setHoveredCategory(cat.id)}
+                  onMouseLeave={() => setHoveredCategory(null)}
+                  className="py-4.5 sm:py-5 group relative transition-colors duration-300 px-2 sm:px-3 hover:bg-zinc-50/80 dark:hover:bg-zinc-900/40 rounded-lg"
+                >
+                  {/* Left Active Accent Indicator Bar */}
+                  <div 
+                    className={`absolute left-0 top-2 bottom-2 w-1 rounded-full transition-all duration-300 ${
+                      isHovered ? "opacity-100 scale-y-100" : "opacity-0 scale-y-50"
+                    }`}
+                    style={{ backgroundColor: cat.accentColor }}
+                  />
+
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6">
+                    
+                    {/* Category Title & Index */}
+                    <div className="flex items-center gap-3 min-w-[200px] shrink-0">
+                      <span className="font-mono text-[11px] text-zinc-400 dark:text-zinc-500 font-semibold">
+                        {cat.index}
+                      </span>
+                      <div className="p-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800/70 shrink-0">
+                        {cat.icon}
+                      </div>
+                      <span className="font-mono text-xs font-extrabold tracking-wider text-zinc-900 dark:text-zinc-100 uppercase group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                        {cat.title}
+                      </span>
+                    </div>
+
+                    {/* Skill Tags & Levels (Clean Horizontal Flow) */}
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 flex-1 justify-start md:justify-end">
+                      {cat.skills.map((skill, sIdx) => (
+                        <div
+                          key={sIdx}
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100/80 dark:bg-zinc-900/80 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-2xs"
+                        >
+                          <span className="text-[12px] sm:text-[12.5px] font-semibold text-zinc-800 dark:text-zinc-200">
                             {skill.name}
                           </span>
-                          <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 text-zinc-400">
+                          <span className={`px-1.5 py-0.5 rounded-md text-[9px] font-mono font-medium border ${cat.badgeColor}`}>
                             {skill.level}
                           </span>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+
                   </div>
                 </div>
-              </BentoCard>
-            );
-          })}
+              );
+            })}
+          </div>
 
-          {/* Interactive 3D Robot Card */}
-          <BentoCard 
-            className="md:col-span-2 lg:col-span-4 h-[420px] relative overflow-hidden p-0" 
-            hoverGlow="green"
-            delay={0.2}
-          >
-            {isMobile ? (
-              <TerminalVisualizerFallback />
-            ) : (
-              <>
-                <InteractiveRobotSpline
-                  scene={ROBOT_SCENE_URL}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                <div className="absolute top-4 left-4 z-10 font-mono text-[10px] text-emerald-400 bg-zinc-950/80 border border-zinc-850 px-3 py-1.5 rounded-md flex items-center space-x-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>3D Interactive sandbox</span>
-                </div>
-              </>
-            )}
-          </BentoCard>
+          {/* Minimal Editorial Footer Note */}
+          <div className="mt-8 pt-4 flex items-center justify-between text-xs text-zinc-500 font-mono">
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              Continuously learning & adopting new modern stacks.
+            </span>
+            <span className="hidden sm:inline text-zinc-400 dark:text-zinc-600">
+              Shashank Verma // Portfolio 2026
+            </span>
+          </div>
+
         </div>
+
+
+        {/* ================= RIGHT HALF: FULL-BLEED 3D TECH RUBIK'S CUBE ================= */}
+        <div className="lg:col-span-5 xl:col-span-5 relative flex items-center justify-center overflow-hidden min-h-[460px] lg:min-h-full">
+          
+          <div className="absolute inset-0 w-full h-full">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/skills/tech-cube-single-face.png"
+              alt="3D Illuminated Tech Rubik's Cube"
+              className="w-full h-full object-cover object-center select-none"
+            />
+            
+            {/* Seamless Horizontal Vignette into Left Content */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white dark:from-[#090b10] via-white/30 dark:via-[#090b10]/40 to-transparent pointer-events-none lg:w-1/3" />
+            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#090b10] via-transparent to-transparent pointer-events-none h-1/4 bottom-0 top-auto lg:hidden" />
+          </div>
+
+        </div>
+
       </div>
     </section>
   );
 }
-

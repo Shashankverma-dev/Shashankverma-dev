@@ -1,49 +1,64 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 
 type Theme = "light" | "dark";
 
 interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
+  setTheme: (theme: Theme) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark"); // Default to dark as requested
+  const [theme, setThemeState] = useState<Theme>("dark");
+  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    // Check local storage or system preference
-    const savedTheme = localStorage.getItem("theme") as Theme | null;
-    const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    
-    const initialTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setTheme(initialTheme);
-    
-    if (initialTheme === "dark") {
-      document.documentElement.classList.add("dark");
+  const applyTheme = useCallback((newTheme: Theme) => {
+    const root = document.documentElement;
+    if (newTheme === "dark") {
+      root.classList.add("dark");
+      root.style.colorScheme = "dark";
     } else {
-      document.documentElement.classList.remove("dark");
+      root.classList.remove("dark");
+      root.style.colorScheme = "light";
     }
   }, []);
 
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    
-    if (newTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
+  useEffect(() => {
+    try {
+      const savedTheme = localStorage.getItem("theme") as Theme | null;
+      const isCurrentlyDark = document.documentElement.classList.contains("dark");
+      const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      
+      const activeTheme: Theme = savedTheme || (isCurrentlyDark ? "dark" : systemDark ? "dark" : "light");
+      setThemeState(activeTheme);
+      applyTheme(activeTheme);
+      setMounted(true);
+    } catch (e) {
+      console.error(e);
+      setMounted(true);
     }
-  };
+  }, [applyTheme]);
+
+  const setTheme = useCallback((newTheme: Theme) => {
+    setThemeState(newTheme);
+    applyTheme(newTheme);
+    try {
+      localStorage.setItem("theme", newTheme);
+    } catch (e) {
+      console.error(e);
+    }
+  }, [applyTheme]);
+
+  const toggleTheme = useCallback(() => {
+    setTheme(theme === "light" ? "dark" : "light");
+  }, [theme, setTheme]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

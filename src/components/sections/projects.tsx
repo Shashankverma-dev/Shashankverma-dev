@@ -120,7 +120,7 @@ const spotlightProjects: SpotlightProject[] = [
     description:
       "A premium, open-source customer feedback SaaS that helps businesses boost Google Reviews, build mobile-first digital menus, generate dynamic QR codes, and track analytics — all from a single bone-white workspace. No subscriptions, no seat limits.",
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel", "REST API"],
-    live: "https://rateme-seven.vercel.app/",
+    live: "https://www.rateme.co.in/",
     heroImage: "/projects/rateme.png",
     heroAlt: "Rateme — review collection SaaS dashboard",
     heroPosition: "top",

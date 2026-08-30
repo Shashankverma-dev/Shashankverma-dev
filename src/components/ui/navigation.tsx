@@ -56,6 +56,17 @@ export function Navigation() {
     { label: "Contact", href: "#contact" },
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const targetElement = document.querySelector(href);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: "smooth" });
+        setIsOpen(false);
+      }
+    }
+  };
+
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -80,6 +91,7 @@ export function Navigation() {
             <a
               key={link.label}
               href={link.href}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="text-zinc-500 hover:text-emerald-500 dark:text-zinc-400 dark:hover:text-cyan-400 transition-colors relative py-1.5 group"
             >
               <span>{link.label}</span>
@@ -132,7 +144,10 @@ export function Navigation() {
               <a
                 key={link.label}
                 href={link.href}
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  handleNavClick(e, link.href);
+                  setIsOpen(false);
+                }}
                 className="text-zinc-600 hover:text-emerald-500 dark:text-zinc-400 dark:hover:text-cyan-400 py-1 border-b border-zinc-50 dark:border-zinc-900/50 last:border-0"
               >
                 ./{link.label}
