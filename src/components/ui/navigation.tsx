@@ -138,43 +138,50 @@ export function Navigation() {
 
       {/* Mobile Drawer Overlay */}
       {isOpen && (
-        <div className="md:hidden fixed inset-x-0 top-[70px] bg-white dark:bg-black border-b border-zinc-150 dark:border-zinc-900 shadow-xl p-6 font-mono text-sm space-y-4">
-          <nav className="flex flex-col space-y-3">
-            {navLinks.map((link) => (
+        <>
+          <div 
+            onClick={() => setIsOpen(false)}
+            className="md:hidden fixed inset-0 top-[65px] bg-black/40 backdrop-blur-xs z-40 transition-opacity" 
+            aria-hidden="true"
+          />
+          <div className="md:hidden fixed inset-x-0 top-[65px] z-50 bg-white/95 dark:bg-black/95 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 font-mono text-sm space-y-4 animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-65px)] overflow-y-auto">
+            <nav className="flex flex-col space-y-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => {
+                    handleNavClick(e, link.href);
+                    setIsOpen(false);
+                  }}
+                  className="flex items-center min-h-[44px] text-zinc-700 hover:text-emerald-500 dark:text-zinc-300 dark:hover:text-cyan-400 py-2 border-b border-zinc-100 dark:border-zinc-900/60 last:border-0 font-medium transition-colors"
+                >
+                  ./{link.label}
+                </a>
+              ))}
+            </nav>
+            <div className="flex items-center space-x-5 pt-4 border-t border-zinc-100 dark:border-zinc-800">
               <a
-                key={link.label}
-                href={link.href}
-                onClick={(e) => {
-                  handleNavClick(e, link.href);
-                  setIsOpen(false);
-                }}
-                className="text-zinc-600 hover:text-emerald-500 dark:text-zinc-400 dark:hover:text-cyan-400 py-1 border-b border-zinc-50 dark:border-zinc-900/50 last:border-0"
+                href="https://github.com/Shashankverma-dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 text-xs text-zinc-600 dark:text-zinc-400 hover:text-emerald-500 transition-colors py-1"
               >
-                ./{link.label}
+                <GithubIcon className="w-4 h-4" />
+                <span>GitHub</span>
               </a>
-            ))}
-          </nav>
-          <div className="flex items-center space-x-4 pt-4 border-t border-zinc-100 dark:border-zinc-900">
-            <a
-              href="https://github.com/Shashankverma-dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-xs text-zinc-500"
-            >
-              <GithubIcon className="w-4 h-4" />
-              <span>GitHub</span>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/shashank-verma-dev/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-xs text-zinc-500"
-            >
-              <LinkedinIcon className="w-4 h-4" />
-              <span>LinkedIn</span>
-            </a>
+              <a
+                href="https://www.linkedin.com/in/shashank-verma-dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 text-xs text-zinc-600 dark:text-zinc-400 hover:text-cyan-400 transition-colors py-1"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+                <span>LinkedIn</span>
+              </a>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </header>
   );

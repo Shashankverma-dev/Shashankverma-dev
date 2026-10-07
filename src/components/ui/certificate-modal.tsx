@@ -73,7 +73,7 @@ export function CertificateModal({ certificate, onClose }: CertificateModalProps
           </div>
 
           {/* Modal Scrollable Body */}
-          <div className="overflow-y-auto flex-grow p-6 space-y-5">
+          <div className="overflow-y-auto flex-grow p-4 sm:p-6 space-y-4 sm:space-y-5">
             {/* Certificate Graphic / Document Preview */}
             <div className="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-sm">
               <CertificatePreviewCanvas item={certificate} className="aspect-[16/9]" />
@@ -185,7 +185,7 @@ export function CertificateModal({ certificate, onClose }: CertificateModalProps
           </div>
 
           {/* Pinned Footer Action Buttons */}
-          <div className="flex items-center justify-end space-x-3 px-6 py-4 border-t border-zinc-150 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-900/30 shrink-0">
+          <div className="flex flex-wrap items-center justify-end gap-2.5 px-4 sm:px-6 py-3.5 sm:py-4 border-t border-zinc-150 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-zinc-900/30 shrink-0">
             {certificate.filePath && (
               <a
                 href={certificate.filePath}

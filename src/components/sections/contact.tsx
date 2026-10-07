@@ -105,13 +105,13 @@ export function Contact() {
                   href="mailto:shashankvermahsst@gmail.com"
                   className="flex items-center justify-between p-4 rounded-xl border border-zinc-100 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-900/10 hover:border-emerald-500/30 dark:hover:border-cyan-500/30 hover:bg-zinc-100 dark:hover:bg-zinc-900/30 transition-all group mb-8"
                 >
-                  <div className="flex items-center space-x-3.5">
-                    <div className="p-2.5 rounded bg-emerald-500/10 text-emerald-500 dark:text-cyan-400">
-                      <Mail className="w-5 h-5" />
+                  <div className="flex items-center space-x-3 sm:space-x-3.5 min-w-0 mr-2">
+                    <div className="p-2 sm:p-2.5 rounded bg-emerald-500/10 text-emerald-500 dark:text-cyan-400 shrink-0">
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="font-mono text-[9px] uppercase tracking-wider text-zinc-400">direct_email</p>
-                      <p className="font-mono text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+                      <p className="font-mono text-xs sm:text-sm font-semibold text-zinc-800 dark:text-zinc-200 truncate">
                         shashankvermahsst@gmail.com
                       </p>
                     </div>

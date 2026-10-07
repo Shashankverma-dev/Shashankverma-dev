@@ -136,7 +136,7 @@ export function Skills() {
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6">
                     
                     {/* Category Title & Index */}
-                    <div className="flex items-center gap-3 min-w-[200px] shrink-0">
+                    <div className="flex items-center gap-3 sm:min-w-[180px] shrink-0">
                       <span className="font-mono text-[11px] text-zinc-400 dark:text-zinc-500 font-semibold">
                         {cat.index}
                       </span>
@@ -186,7 +186,7 @@ export function Skills() {
 
 
         {/* ================= RIGHT HALF: FULL-BLEED 3D TECH RUBIK'S CUBE ================= */}
-        <div className="lg:col-span-5 xl:col-span-5 relative flex items-center justify-center overflow-hidden min-h-[460px] lg:min-h-full">
+        <div className="lg:col-span-5 xl:col-span-5 relative flex items-center justify-center overflow-hidden min-h-[280px] sm:min-h-[380px] lg:min-h-full">
           
           <div className="absolute inset-0 w-full h-full">
             {/* eslint-disable-next-line @next/next/no-img-element */}

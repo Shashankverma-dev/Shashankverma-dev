@@ -55,7 +55,7 @@ export const ExpandingCards = React.forwardRef<
       return { gridTemplateColumns: columns };
     } else {
       const rows = items
-        .map((_, index) => (index === activeIndex ? "4.5fr" : "1fr"))
+        .map((_, index) => (index === activeIndex ? "7.5fr" : "1fr"))
         .join(" ");
       return { gridTemplateRows: rows };
     }
@@ -64,9 +64,9 @@ export const ExpandingCards = React.forwardRef<
   return (
     <ul
       className={cn(
-        "w-full max-w-6xl gap-2.5 sm:gap-3",
+        "w-full max-w-6xl gap-2 sm:gap-2.5 md:gap-3",
         "grid",
-        "h-[520px] sm:h-[560px] md:h-[520px] lg:h-[580px]",
+        "h-[590px] sm:h-[620px] md:h-[520px] lg:h-[580px]",
         "transition-[grid-template-columns,grid-template-rows] duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]",
         className,
       )}
@@ -86,10 +86,10 @@ export const ExpandingCards = React.forwardRef<
             key={item.id}
             className={cn(
               "group relative cursor-pointer overflow-hidden rounded-xl sm:rounded-2xl border transition-all duration-300",
-              "border-zinc-200/70 dark:border-zinc-800/80 bg-zinc-100 dark:bg-zinc-950 text-white",
+              "border-zinc-200/70 dark:border-zinc-800/80 bg-zinc-950 text-white",
               "min-h-0 min-w-0 select-none",
               isActive && "ring-1 ring-purple-500/50 shadow-[0_0_30px_rgba(168,85,247,0.2)] border-purple-500/40 dark:border-purple-500/50",
-              !isActive && "hover:border-zinc-300 dark:hover:border-zinc-700/80 opacity-90 hover:opacity-100"
+              !isActive && "hover:border-zinc-300 dark:hover:border-zinc-700/80 opacity-95 hover:opacity-100"
             )}
             onMouseEnter={() => handleInteraction(index)}
             onFocus={() => handleInteraction(index)}
@@ -99,95 +99,159 @@ export const ExpandingCards = React.forwardRef<
             aria-selected={isActive}
             role="tab"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={item.imgSrc}
-              alt={item.title}
-              className={cn(
-                "absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-out",
-                isActive
-                  ? "scale-100 grayscale-0 brightness-100"
-                  : "scale-110 grayscale brightness-75 group-hover:brightness-90"
-              )}
-            />
-            {/* Gradient Overlays */}
-            <div
-              className={cn(
-                "absolute inset-0 transition-opacity duration-300",
-                isActive
-                  ? "bg-gradient-to-t from-black/90 via-black/40 to-transparent"
-                  : "bg-black/50 group-hover:bg-black/35"
-              )}
-            />
+            {/* ═══════════════════════════════════════════════════
+                DESKTOP PRESENTATION (md: and up)
+                Classic horizontal expanding cards with full-bleed image
+                ═══════════════════════════════════════════════════ */}
+            <div className="hidden md:block absolute inset-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={item.imgSrc}
+                alt={item.title}
+                className={cn(
+                  "absolute inset-0 h-full w-full object-cover transition-all duration-500 ease-out",
+                  isActive
+                    ? "scale-100 grayscale-0 brightness-100"
+                    : "scale-110 grayscale brightness-75 group-hover:brightness-90"
+                )}
+              />
+              <div
+                className={cn(
+                  "absolute inset-0 transition-opacity duration-300",
+                  isActive
+                    ? "bg-gradient-to-t from-black/90 via-black/40 to-transparent"
+                    : "bg-black/50 group-hover:bg-black/35"
+                )}
+              />
 
-            {/* Inactive Vertical Title (Desktop only) */}
-            <div
-              className={cn(
-                "absolute inset-0 hidden md:flex items-center justify-center pointer-events-none transition-opacity duration-300",
-                isActive ? "opacity-0 invisible" : "opacity-100 visible"
-              )}
-            >
-              <span className="origin-center -rotate-90 whitespace-nowrap text-xs lg:text-sm font-mono font-semibold tracking-widest text-zinc-300/90 uppercase drop-shadow-md">
-                {item.title}
-              </span>
-            </div>
-
-            {/* Inactive Horizontal Title (Mobile only) */}
-            <div
-              className={cn(
-                "absolute inset-0 flex md:hidden items-center justify-between px-4 pointer-events-none transition-opacity duration-300",
-                isActive ? "opacity-0 invisible" : "opacity-100 visible"
-              )}
-            >
-              <span className="text-xs font-mono font-bold tracking-wider text-zinc-200 uppercase truncate">
-                {item.title}
-              </span>
-              <span className="text-zinc-400 font-mono text-[10px]">
-                0{index + 1}
-              </span>
-            </div>
-
-            {/* Active Content Article */}
-            <article
-              className={cn(
-                "absolute inset-0 flex flex-col justify-end p-4 sm:p-5 lg:p-6 transition-all duration-300",
-                isActive
-                  ? "opacity-100 pointer-events-auto translate-y-0"
-                  : "opacity-0 pointer-events-none translate-y-4"
-              )}
-            >
-              <div className="flex items-center gap-2 mb-1.5 text-purple-400">
-                <span className="p-1.5 rounded-lg bg-purple-500/10 border border-purple-500/20 backdrop-blur-sm">
-                  {item.icon}
-                </span>
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-purple-300">
-                  Featured Project
+              {/* Inactive Vertical Title (Desktop only) */}
+              <div
+                className={cn(
+                  "absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-300",
+                  isActive ? "opacity-0 invisible" : "opacity-100 visible"
+                )}
+              >
+                <span className="origin-center -rotate-90 whitespace-nowrap text-xs lg:text-sm font-mono font-semibold tracking-widest text-zinc-300/90 uppercase drop-shadow-md">
+                  {item.title}
                 </span>
               </div>
 
-              <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-white tracking-tight drop-shadow-sm">
-                {item.title}
-              </h3>
+              {/* Active Content Article (Desktop) */}
+              <article
+                className={cn(
+                  "absolute inset-0 flex flex-col justify-end p-5 lg:p-6 transition-all duration-300",
+                  isActive
+                    ? "opacity-100 pointer-events-auto translate-y-0"
+                    : "opacity-0 pointer-events-none translate-y-4"
+                )}
+              >
+                <div className="flex items-center gap-2 mb-1.5 text-purple-400">
+                  <span className="p-1.5 rounded-lg bg-purple-500/10 border border-purple-500/20 backdrop-blur-sm">
+                    {item.icon}
+                  </span>
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-purple-300">
+                    Featured Project
+                  </span>
+                </div>
 
-              <p className="mt-1 max-w-md text-xs sm:text-sm text-zinc-300/95 leading-relaxed line-clamp-3 sm:line-clamp-4">
-                {item.description}
-              </p>
+                <h3 className="text-xl lg:text-2xl font-black text-white tracking-tight drop-shadow-sm">
+                  {item.title}
+                </h3>
 
-              {item.linkHref && item.linkHref !== "#" && (
-                <div className="mt-3 sm:mt-4 flex items-center gap-3">
-                  <a
-                    href={item.linkHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold tracking-wide shadow-md shadow-purple-600/30 transition-all hover:scale-105 active:scale-95"
-                  >
-                    <span>View Project</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
+                <p className="mt-1 max-w-md text-xs sm:text-sm text-zinc-300/95 leading-relaxed line-clamp-3 sm:line-clamp-4">
+                  {item.description}
+                </p>
+
+                {item.linkHref && item.linkHref !== "#" && (
+                  <div className="mt-4 flex items-center gap-3">
+                    <a
+                      href={item.linkHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold tracking-wide shadow-md shadow-purple-600/30 transition-all hover:scale-105 active:scale-95"
+                    >
+                      <span>View Project</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                )}
+              </article>
+            </div>
+
+            {/* ═══════════════════════════════════════════════════
+                MOBILE PRESENTATION (< md)
+                Split layout for active card (picture on top, text below)
+                Clean compact bar for inactive cards
+                ═══════════════════════════════════════════════════ */}
+            <div className="block md:hidden h-full w-full">
+              {isActive ? (
+                <div className="flex flex-col h-full w-full bg-zinc-950 overflow-hidden">
+                  {/* Top: 100% visible, vibrant project picture */}
+                  <div className="relative w-full h-[165px] shrink-0 bg-zinc-900 overflow-hidden border-b border-zinc-800/80">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={item.imgSrc}
+                      alt={item.title}
+                      className="w-full h-full object-cover object-center brightness-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+                  </div>
+
+                  {/* Bottom: Dedicated, high-contrast content area with zero overlap */}
+                  <div className="flex-1 p-3 bg-zinc-950 flex flex-col justify-between overflow-hidden">
+                    <div>
+                      <div className="flex items-center gap-1.5 mb-1 text-purple-400">
+                        <span className="p-1 rounded-md bg-purple-500/10 border border-purple-500/20">
+                          {item.icon}
+                        </span>
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-purple-300">
+                          Featured Project
+                        </span>
+                      </div>
+
+                      <h3 className="text-base font-black text-white tracking-tight">
+                        {item.title}
+                      </h3>
+
+                      <p className="mt-1 text-xs text-zinc-300 leading-relaxed line-clamp-2">
+                        {item.description}
+                      </p>
+                    </div>
+
+                    {item.linkHref && item.linkHref !== "#" && (
+                      <div className="mt-2 flex items-center">
+                        <a
+                          href={item.linkHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold tracking-wide shadow-md shadow-purple-600/30 transition-all active:scale-95"
+                        >
+                          <span>View Project</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                /* Inactive compact bar on mobile */
+                <div className="h-full w-full flex items-center justify-between px-3.5 bg-zinc-900/90 hover:bg-zinc-800/90 transition-colors">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span className="text-purple-400 text-xs shrink-0">
+                      {item.icon}
+                    </span>
+                    <span className="text-xs font-mono font-bold tracking-wider text-zinc-200 uppercase truncate">
+                      {item.title}
+                    </span>
+                  </div>
+                  <span className="text-zinc-500 font-mono text-[10px] font-semibold shrink-0 ml-2">
+                    0{index + 1}
+                  </span>
                 </div>
               )}
-            </article>
+            </div>
           </li>
         );
       })}

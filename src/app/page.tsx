@@ -57,7 +57,7 @@ export default function Home() {
               y: "-100%",
               transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] }
             }}
-            className="fixed inset-0 z-50 pointer-events-auto"
+            className="fixed inset-0 z-[100] pointer-events-auto"
           >
             <StartingScreen onComplete={() => setLoading(false)} />
           </motion.div>

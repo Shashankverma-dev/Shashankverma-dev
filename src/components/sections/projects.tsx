@@ -98,7 +98,7 @@ export function Projects() {
           <img
             src="/projects/bg_light.png"
             alt=""
-            className="absolute inset-0 w-full h-full object-cover object-[20%_0%] sm:object-[19%_top] opacity-95"
+            className="hidden lg:block absolute inset-0 w-full h-full object-cover object-[20%_0%] sm:object-[19%_top] opacity-95"
           />
           {/* Light gradient blending overlays */}
           <div
@@ -123,7 +123,7 @@ export function Projects() {
           <img
             src="/projects/bg_dark.png"
             alt=""
-            className="absolute inset-0 w-full h-full object-cover object-[20%_0%] sm:object-[19%_top] opacity-95"
+            className="hidden lg:block absolute inset-0 w-full h-full object-cover object-[20%_0%] sm:object-[19%_top] opacity-95"
           />
           {/* Gradient: subtle right fade for clean expanding cards */}
           <div
@@ -156,7 +156,7 @@ export function Projects() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
 
           {/* ═══ LEFT COLUMN: Title, Tagline, & Project Nav ═══ */}
-          <div className="lg:col-span-4 xl:col-span-3 flex flex-col justify-between space-y-6 sm:space-y-8 pt-24 sm:pt-28 md:pt-32 lg:pt-36 xl:pt-40">
+          <div className="lg:col-span-4 xl:col-span-3 flex flex-col justify-between space-y-6 sm:space-y-8 pt-0 sm:pt-4 lg:pt-36 xl:pt-40">
             
             <div className="space-y-3 sm:space-y-4">
               <p className="font-mono text-xs font-bold tracking-widest uppercase">

@@ -14,7 +14,7 @@ export function About() {
       className="relative w-full min-h-screen py-16 lg:py-24 bg-[#ffffff] dark:bg-[#07080c] text-zinc-950 dark:text-[#f3f4f6] selection:bg-purple-500/20 selection:text-purple-600 transition-colors duration-500 overflow-hidden font-sans border-t border-zinc-200/90 dark:border-zinc-800/90"
     >
       {/* Maximum Editorial Spread Canvas */}
-      <div className="max-w-[1560px] mx-auto px-6 sm:px-10 lg:px-14 relative z-10">
+      <div className="max-w-[1560px] mx-auto px-4 sm:px-10 lg:px-14 relative z-10">
         
         {/* ================= ASYMMETRIC MAIN GRID ================= */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start relative pt-2">
@@ -35,9 +35,9 @@ export function About() {
             </div>
 
             {/* Top Row: GIANT HEADLINE + ROTATING EMBLEM */}
-            <div className="flex items-start justify-between gap-4 mb-4">
+            <div className="flex items-start justify-between gap-3 sm:gap-4 mb-4">
               <div className="select-none">
-                <h2 className="text-[52px] xs:text-[64px] sm:text-[84px] md:text-[112px] xl:text-[140px] font-black leading-[0.82] tracking-[-0.045em] uppercase text-zinc-950 dark:text-white">
+                <h2 className="text-[44px] sm:text-[76px] md:text-[104px] xl:text-[140px] font-black leading-[0.84] tracking-[-0.045em] uppercase text-zinc-950 dark:text-white">
                   ABOUT
                   <br />
                   ME<span className="text-zinc-950 dark:text-white">.</span>
