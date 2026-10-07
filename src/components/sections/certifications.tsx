@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CERTIFICATIONS_DATA, CertificationItem } from "@/data/certifications";
 import { InteractiveCertificateFrame } from "../ui/interactive-certificate-frame";
 import { CertificateModal } from "../ui/certificate-modal";
-import { 
-  ShieldCheck, 
-  Award, 
-  Search, 
-  LayoutGrid, 
-  Columns2, 
+import {
+  ShieldCheck,
+  Award,
+  Search,
+  LayoutGrid,
+  Columns2,
   ExternalLink,
   Eye,
   FileCheck,
@@ -32,28 +32,28 @@ export function Certifications() {
       counts[cert.category] = (counts[cert.category] || 0) + 1;
     });
 
-    const order: string[] = [
-      "Web Development",
+    const categoryOrder: string[] = [
       "AI / ML",
+      "Web Development",
       "Cloud & DevOps",
       "Programming",
       "UI/UX Design",
       "Database",
     ];
 
-    const allCats = Array.from(new Set(CERTIFICATIONS_DATA.map((c) => c.category)));
-    const sortedCats = allCats.sort((a, b) => {
-      const ia = order.indexOf(a);
-      const ib = order.indexOf(b);
-      if (ia !== -1 && ib !== -1) return ia - ib;
-      if (ia !== -1) return -1;
-      if (ib !== -1) return 1;
+    const uniqueCategories = Array.from(new Set(CERTIFICATIONS_DATA.map((c) => c.category)));
+    const sortedCategories = uniqueCategories.sort((a, b) => {
+      const idxA = categoryOrder.indexOf(a);
+      const idxB = categoryOrder.indexOf(b);
+      if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+      if (idxA !== -1) return -1;
+      if (idxB !== -1) return 1;
       return a.localeCompare(b);
     });
 
     return [
       { label: "All", value: "All", count: CERTIFICATIONS_DATA.length },
-      ...sortedCats.map((cat) => ({
+      ...sortedCategories.map((cat) => ({
         label: cat,
         value: cat,
         count: counts[cat] || 0,
@@ -118,7 +118,7 @@ export function Certifications() {
 
       {/* ================= MAIN CONTENT WRAPPER ================= */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* ================= SECTION HEADER ================= */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 sm:mb-10">
           <div className="space-y-2 max-w-xl">
@@ -143,7 +143,7 @@ export function Certifications() {
 
           {/* Interactive Category Filter Pills & Search */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
-            {/* Category Filter Pills (All categories included with counts) */}
+            {/* Category Filter Pills (All categories with count badges) */}
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1.5 sm:pb-0 scrollbar-none p-1.5 rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 shadow-md max-w-full">
               {categories.map((cat) => {
                 const isActive = activeCategory === cat.value;
@@ -201,7 +201,7 @@ export function Certifications() {
           </div>
         </div>
 
-        {/* Filter Results Status Row */}
+        {/* Filter Status Summary Row */}
         <div className="flex items-center justify-between text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-6 px-1">
           <p>
             Showing <span className="font-bold text-zinc-950 dark:text-zinc-50">{filteredCertificates.length}</span> of{" "}
@@ -227,7 +227,7 @@ export function Certifications() {
           )}
         </div>
 
-        {/* ================= CODE-GENERATED HANGING FRAMES WALL GRID ================= */}
+        {/* ================= CODE-GENERATED HANGING FRAMES WALL GRID (4x2 MATCHING REFERENCE) ================= */}
         {filteredCertificates.length === 0 ? (
           /* Empty Search Fallback */
           <div className="p-12 text-center rounded-2xl bg-white/70 dark:bg-zinc-900/70 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 max-w-md mx-auto my-12 space-y-3">
@@ -245,7 +245,7 @@ export function Certifications() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 sm:gap-x-7 lg:gap-x-8 gap-y-8 sm:gap-y-10 items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 sm:gap-x-7 lg:gap-x-8 gap-y-6 sm:gap-y-8 items-start">
             {filteredCertificates.map((cert, idx) => (
               <InteractiveCertificateFrame
                 key={cert.id}

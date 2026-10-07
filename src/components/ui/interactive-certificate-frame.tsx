@@ -156,16 +156,16 @@ export function InteractiveCertificateFrame({
 
         {/* Matte Black Wooden Frame Profile */}
         <div className="relative rounded-[7px] bg-[#111215] dark:bg-[#0a0a0d] p-[4px] sm:p-[5px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),inset_0_-1.5px_3px_rgba(0,0,0,0.85),0_2px_6px_rgba(0,0,0,0.5)] border border-[#23242a]">
-          
+
           {/* Subtle Top Rim Highlight Catching Overhead Spotlight */}
           <div className="absolute top-0 inset-x-2 h-[1px] bg-gradient-to-r from-transparent via-white/35 to-transparent pointer-events-none" />
 
           {/* ================= 3. PASSE-PARTOUT (MUSEUM MAT BOARD) ================= */}
           <div className="relative rounded-[4px] bg-[#fbfbfb] p-1.5 sm:p-2 shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.18),inset_0_0_0_1px_rgba(0,0,0,0.06)]">
-            
+
             {/* Inner Artwork Window with Bevel Cut */}
             <div className="relative aspect-[16/11] w-full rounded-[2px] overflow-hidden bg-white shadow-[inset_0_1px_2.5px_rgba(0,0,0,0.3),0_0_0_1px_rgba(0,0,0,0.1)] flex items-center justify-center">
-              
+
               {/* Certificate Artwork / High-Definition Document */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -173,9 +173,8 @@ export function InteractiveCertificateFrame({
                 alt={item.title}
                 loading="lazy"
                 onLoad={() => setImgLoaded(true)}
-                className={`w-full h-full object-contain transition-all duration-500 ease-out group-hover:scale-[1.015] ${
-                  imgLoaded ? "opacity-100" : "opacity-90"
-                }`}
+                className={`w-full h-full object-contain transition-all duration-500 ease-out group-hover:scale-[1.015] ${imgLoaded ? "opacity-100" : "opacity-90"
+                  }`}
                 style={{
                   imageRendering: "auto",
                 }}
@@ -212,19 +211,17 @@ export function InteractiveCertificateFrame({
         </div>
       </motion.div>
 
-      {/* ================= 5. GALLERY EXHIBIT TITLE PLAQUE ================= */}
-      <div 
+      {/* Museum Identification Plaque below Frame */}
+      <div
         onClick={() => onSelect(item)}
-        className="mt-2.5 sm:mt-3 w-full text-center px-1 cursor-pointer transition-transform duration-200 group-hover:-translate-y-0.5"
+        className="mt-3 w-full text-center px-2 py-1.5 rounded-lg bg-white/70 dark:bg-zinc-900/70 backdrop-blur-xs border border-zinc-200/60 dark:border-zinc-800/60 shadow-xs cursor-pointer hover:border-emerald-500/50 hover:bg-white/90 dark:hover:bg-zinc-900/90 transition-all duration-200 group-hover:shadow-md"
       >
-        <h4 className="font-sans font-bold text-xs sm:text-[13px] text-zinc-900 dark:text-zinc-100 line-clamp-2 leading-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+        <p className="text-xs font-bold text-zinc-900 dark:text-zinc-100 line-clamp-1 leading-snug">
           {item.title}
-        </h4>
-        <div className="flex items-center justify-center gap-1.5 mt-1 text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
-          <span className="truncate max-w-[120px] sm:max-w-[150px]">{item.issuer}</span>
-          <span>•</span>
-          <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{item.category}</span>
-        </div>
+        </p>
+        <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-mono mt-0.5 truncate">
+          {item.issuer} • {item.issueDate}
+        </p>
       </div>
     </motion.div>
   );
