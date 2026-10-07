@@ -26,17 +26,34 @@ export function Certifications() {
   const [viewMode, setViewMode] = useState<"grid" | "spotlight">("grid");
   const [spotlightIndex, setSpotlightIndex] = useState<number>(0);
 
-  const categories: { label: string; value: string; count: number }[] = useMemo(() => {
+  const categories = useMemo(() => {
     const counts: Record<string, number> = { All: CERTIFICATIONS_DATA.length };
     CERTIFICATIONS_DATA.forEach((cert) => {
       counts[cert.category] = (counts[cert.category] || 0) + 1;
     });
 
-    const uniqueCategories = Array.from(new Set(CERTIFICATIONS_DATA.map((c) => c.category)));
+    const order: string[] = [
+      "Web Development",
+      "AI / ML",
+      "Cloud & DevOps",
+      "Programming",
+      "UI/UX Design",
+      "Database",
+    ];
+
+    const allCats = Array.from(new Set(CERTIFICATIONS_DATA.map((c) => c.category)));
+    const sortedCats = allCats.sort((a, b) => {
+      const ia = order.indexOf(a);
+      const ib = order.indexOf(b);
+      if (ia !== -1 && ib !== -1) return ia - ib;
+      if (ia !== -1) return -1;
+      if (ib !== -1) return 1;
+      return a.localeCompare(b);
+    });
 
     return [
       { label: "All", value: "All", count: CERTIFICATIONS_DATA.length },
-      ...uniqueCategories.map((cat) => ({
+      ...sortedCats.map((cat) => ({
         label: cat,
         value: cat,
         count: counts[cat] || 0,
@@ -45,22 +62,20 @@ export function Certifications() {
   }, []);
 
   const filteredCertificates = useMemo(() => {
-    const list = CERTIFICATIONS_DATA.filter((cert) => {
-      const matchesCategory = activeCategory === "All" || cert.category === activeCategory;
+    return CERTIFICATIONS_DATA.filter((cert) => {
+      const matchesCategory =
+        activeCategory === "All" ||
+        cert.category.toLowerCase() === activeCategory.toLowerCase();
+      const q = searchQuery.trim().toLowerCase();
       const matchesSearch =
-        searchQuery.trim() === "" ||
-        cert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        cert.issuer.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        cert.skills.some((s) => s.toLowerCase().includes(searchQuery.toLowerCase()));
+        q === "" ||
+        cert.title.toLowerCase().includes(q) ||
+        cert.issuer.toLowerCase().includes(q) ||
+        cert.category.toLowerCase().includes(q) ||
+        cert.skills.some((s) => s.toLowerCase().includes(q)) ||
+        (cert.credentialId && cert.credentialId.toLowerCase().includes(q));
       return matchesCategory && matchesSearch;
     });
-
-    // If "All" category is active and no search query, display the 8 featured credentials
-    if (activeCategory === "All" && searchQuery.trim() === "") {
-      return list.slice(0, 8);
-    }
-
-    return list;
   }, [activeCategory, searchQuery]);
 
   const currentSpotlight = filteredCertificates[spotlightIndex] || filteredCertificates[0] || CERTIFICATIONS_DATA[0];
@@ -104,8 +119,8 @@ export function Certifications() {
       {/* ================= MAIN CONTENT WRAPPER ================= */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* ================= SECTION HEADER (MATCHING REFERENCE IMAGE) ================= */}
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8 sm:mb-10">
+        {/* ================= SECTION HEADER ================= */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 sm:mb-10">
           <div className="space-y-2 max-w-xl">
             {/* Tagline */}
             <p className="font-mono text-xs font-bold tracking-wider text-emerald-700 dark:text-emerald-400 uppercase drop-shadow-xs">
@@ -127,10 +142,10 @@ export function Certifications() {
           </div>
 
           {/* Interactive Category Filter Pills & Search */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
-            {/* Category Filter Pills */}
-            <div className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0 scrollbar-none p-1 rounded-xl bg-white/70 dark:bg-zinc-900/70 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 shadow-md">
-              {categories.slice(0, 4).map((cat) => {
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
+            {/* Category Filter Pills (All categories included with counts) */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1.5 sm:pb-0 scrollbar-none p-1.5 rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 shadow-md max-w-full">
+              {categories.map((cat) => {
                 const isActive = activeCategory === cat.value;
                 return (
                   <button
@@ -139,20 +154,29 @@ export function Certifications() {
                       setActiveCategory(cat.value);
                       setSpotlightIndex(0);
                     }}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium whitespace-nowrap transition-all ${
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium whitespace-nowrap transition-all flex items-center gap-1.5 ${
                       isActive
                         ? "bg-zinc-950 text-white dark:bg-emerald-500 dark:text-zinc-950 font-bold shadow-xs"
                         : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
                     }`}
                   >
-                    {cat.label}
+                    <span>{cat.label}</span>
+                    <span
+                      className={`text-[10px] px-1.5 py-0.5 rounded-full font-mono transition-colors ${
+                        isActive
+                          ? "bg-white/20 dark:bg-black/20 text-white dark:text-zinc-950"
+                          : "bg-zinc-200/70 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400"
+                      }`}
+                    >
+                      {cat.count}
+                    </span>
                   </button>
                 );
               })}
             </div>
 
             {/* Search Input */}
-            <div className="relative w-full sm:w-48">
+            <div className="relative w-full sm:w-56 shrink-0">
               <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none" />
               <input
                 type="text"
@@ -161,14 +185,49 @@ export function Certifications() {
                   setSearchQuery(e.target.value);
                   setSpotlightIndex(0);
                 }}
-                placeholder="Search..."
-                className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-white/75 dark:bg-zinc-900/75 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all font-mono"
+                placeholder="Search credentials, skills..."
+                className="w-full pl-8 pr-7 py-1.5 rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 text-xs text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all font-mono"
               />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+                  aria-label="Clear search"
+                >
+                  ✕
+                </button>
+              )}
             </div>
           </div>
         </div>
 
-        {/* ================= CODE-GENERATED HANGING FRAMES WALL GRID (4x2 MATCHING REFERENCE) ================= */}
+        {/* Filter Results Status Row */}
+        <div className="flex items-center justify-between text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-6 px-1">
+          <p>
+            Showing <span className="font-bold text-zinc-950 dark:text-zinc-50">{filteredCertificates.length}</span> of{" "}
+            <span className="font-bold text-zinc-950 dark:text-zinc-50">{CERTIFICATIONS_DATA.length}</span> credentials
+            {activeCategory !== "All" && (
+              <span> in <span className="text-emerald-600 dark:text-emerald-400 font-bold">{activeCategory}</span></span>
+            )}
+            {searchQuery.trim() && (
+              <span> matching &quot;<span className="text-[#8b5cf6] dark:text-[#a855f7] font-semibold">{searchQuery}</span>&quot;</span>
+            )}
+          </p>
+
+          {(activeCategory !== "All" || searchQuery) && (
+            <button
+              onClick={() => {
+                setActiveCategory("All");
+                setSearchQuery("");
+              }}
+              className="text-xs text-emerald-600 dark:text-emerald-400 hover:underline font-bold transition-colors"
+            >
+              Reset filters
+            </button>
+          )}
+        </div>
+
+        {/* ================= CODE-GENERATED HANGING FRAMES WALL GRID ================= */}
         {filteredCertificates.length === 0 ? (
           /* Empty Search Fallback */
           <div className="p-12 text-center rounded-2xl bg-white/70 dark:bg-zinc-900/70 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 max-w-md mx-auto my-12 space-y-3">
@@ -186,7 +245,7 @@ export function Certifications() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 sm:gap-x-7 lg:gap-x-8 gap-y-6 sm:gap-y-8 items-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 sm:gap-x-7 lg:gap-x-8 gap-y-8 sm:gap-y-10 items-start">
             {filteredCertificates.map((cert, idx) => (
               <InteractiveCertificateFrame
                 key={cert.id}

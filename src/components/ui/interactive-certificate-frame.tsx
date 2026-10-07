@@ -211,6 +211,21 @@ export function InteractiveCertificateFrame({
           <div className="absolute bottom-0 inset-x-2 h-[1px] bg-gradient-to-r from-transparent via-black/50 to-transparent pointer-events-none" />
         </div>
       </motion.div>
+
+      {/* ================= 5. GALLERY EXHIBIT TITLE PLAQUE ================= */}
+      <div 
+        onClick={() => onSelect(item)}
+        className="mt-2.5 sm:mt-3 w-full text-center px-1 cursor-pointer transition-transform duration-200 group-hover:-translate-y-0.5"
+      >
+        <h4 className="font-sans font-bold text-xs sm:text-[13px] text-zinc-900 dark:text-zinc-100 line-clamp-2 leading-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+          {item.title}
+        </h4>
+        <div className="flex items-center justify-center gap-1.5 mt-1 text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
+          <span className="truncate max-w-[120px] sm:max-w-[150px]">{item.issuer}</span>
+          <span>•</span>
+          <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{item.category}</span>
+        </div>
+      </div>
     </motion.div>
   );
 }
