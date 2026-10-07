@@ -24,20 +24,20 @@ export interface CertificationItem {
   description: string;
   badgeStyle: {
     type:
-    | "coursera-blue"
-    | "hackerrank-hex"
-    | "fcc-flame"
-    | "meta-blue"
-    | "aws-hex"
-    | "microsoft-excel"
-    | "udemy-purple"
-    | "gfg-green"
-    | "hplife-red"
-    | "simplilearn-orange"
-    | "skillindia-tricolor"
-    | "gold-crest"
-    | "nasscom-navy"
-    | "unstop-blue";
+      | "coursera-blue"
+      | "hackerrank-hex"
+      | "fcc-flame"
+      | "meta-blue"
+      | "aws-hex"
+      | "microsoft-excel"
+      | "udemy-purple"
+      | "gfg-green"
+      | "hplife-red"
+      | "simplilearn-orange"
+      | "skillindia-tricolor"
+      | "gold-crest"
+      | "nasscom-navy"
+      | "unstop-blue";
     badgeText?: string;
     subText?: string;
     primaryColor: string;
@@ -46,14 +46,38 @@ export interface CertificationItem {
 }
 
 export const CERTIFICATION_STATS = {
-  totalCount: "13",
-  issuingOrgs: "8+",
+  totalCount: "14",
+  issuingOrgs: "9+",
   activePeriod: "2023 – 2026",
   status: "Verified",
 };
 
 export const CERTIFICATIONS_DATA: CertificationItem[] = [
-  // 1. Full Stack Web Dev with AI - Internshala & Skill India (NSDC)
+  // 1. Introduction to Machine Learning (Elite) - NPTEL & IIT Kharagpur
+  {
+    id: "nptel-machine-learning-elite",
+    title: "Introduction to Machine Learning (Elite)",
+    issuer: "NPTEL & IIT Kharagpur",
+    issueDate: "Sep 2026",
+    year: 2026,
+    category: "AI / ML",
+    verified: true,
+    credentialId: "NPTEL26CS119S254201033",
+    credentialUrl: "https://nptel.ac.in/noc",
+    filePath: "/certifications/NOC26CS119S254201033.pdf",
+    previewImage: "/certifications/previews/nptel_machine_learning.jpg",
+    skills: ["Machine Learning", "Supervised Learning", "Classification & Regression", "Neural Networks", "IIT Kharagpur", "SWAYAM"],
+    description: "Elite Certification awarded by NPTEL, Ministry of Education (Govt. of India), and Indian Institute of Technology Kharagpur with a consolidated score of 65% in the 8-week Machine Learning program.",
+    badgeStyle: {
+      type: "gold-crest",
+      badgeText: "NPTEL Elite",
+      subText: "IIT Kharagpur",
+      primaryColor: "#c2410c",
+      accentColor: "#d97706",
+    },
+  },
+
+  // 2. Full Stack Web Dev with AI - Internshala & Skill India (NSDC)
   {
     id: "internshala-fullstack-ai-nsdc",
     title: "Full Stack Web Development with AI (Grade A)",
@@ -77,7 +101,7 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     },
   },
 
-  // 2. Full Stack Web Development with AI Training - SRHU
+  // 3. Full Stack Web Development with AI Training - SRHU
   {
     id: "internshala-fullstack-ai-srhu",
     title: "Full Stack Web Development with AI Training",
@@ -101,7 +125,7 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     },
   },
 
-  // 3. QuizOff 2026: India's Biggest AI Quiz - Unstop & CampusCrew
+  // 4. QuizOff 2026: India's Biggest AI Quiz - Unstop & CampusCrew
   {
     id: "quizoff-ai-unstop",
     title: "QuizOff 2026: India's Biggest AI Quiz",
@@ -112,7 +136,7 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     verified: true,
     credentialId: "UNSTOP-QZ-2026",
     credentialUrl: "https://unstop.com/",
-    filePath: "/certifications/quiz.jpeg",
+    filePath: "/certifications/quiz.pdf",
     previewImage: "/certifications/previews/quiz.jpg",
     skills: ["Artificial Intelligence", "AI Problem Solving", "Competitive AI", "CampusCrew", "Unstop"],
     description: "Certificate of Participation presented in recognition of competing in QuizOff 2026: India's Biggest AI Quiz, organised by CampusCrew and hosted on Unstop with 5,25,000+ global participants.",
@@ -317,7 +341,7 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     },
   },
 
-  // 12. TechForge 2.0 Hackathon (SIH 2025) - SRHU
+  // 13. TechForge 2.0 Hackathon (SIH 2025) - SRHU
   {
     id: "srhu-techforge-hackathon",
     title: "TechForge 2.0 Hackathon (Aligned with SIH 2025)",
@@ -327,7 +351,7 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     category: "Programming",
     verified: true,
     credentialId: "SRHU-TF2-SIH2025",
-    filePath: "/certifications/1200px.jpg",
+    filePath: "/certifications/1200px.pdf",
     previewImage: "/certifications/previews/1200px.jpg",
     skills: ["Smart India Hackathon", "Collaborative Sprint", "Rapid Prototyping", "Full Stack MVP"],
     description: "Certificate of Active Participation in the 48-hour TechForge 2.0 national hackathon aligned with Smart India Hackathon 2025 by School of Science and Technology, SRHU.",
@@ -340,7 +364,7 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     },
   },
 
-  // 13. Computer Wizard Academic Award - Nancy International School
+  // 14. Computer Wizard Academic Award - Nancy International School
   {
     id: "computer-wizard-award",
     title: "Computer Wizard Academic Honor (Class XII Sci)",
@@ -350,7 +374,7 @@ export const CERTIFICATIONS_DATA: CertificationItem[] = [
     category: "Programming",
     verified: true,
     credentialId: "NIS-CW-2023",
-    filePath: "/certifications/computer wizard.jpg",
+    filePath: "/certifications/computer wizard.pdf",
     previewImage: "/certifications/previews/computer_wizard.jpg",
     skills: ["Computer Science", "Academic Excellence", "Practical Lab", "Problem Solving"],
     description: "Awarded 'Computer Wizard' honor at the 17th Annual Day Celebration during the academic session 2023-2024 for outstanding performance in Computer Science.",
