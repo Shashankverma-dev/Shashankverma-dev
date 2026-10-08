@@ -186,7 +186,7 @@ export function Certifications() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ================= SECTION HEADER ================= */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 sm:mb-10">
+        <div className="flex flex-col 2xl:flex-row 2xl:items-end justify-between gap-6 mb-8 sm:mb-10">
           <div className="space-y-2 max-w-xl">
             {/* Tagline */}
             <p className="font-mono text-xs font-bold tracking-wider text-emerald-700 dark:text-emerald-400 uppercase drop-shadow-xs">
@@ -208,7 +208,7 @@ export function Certifications() {
           </div>
 
           {/* Interactive Category Filter Pills & Search */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full 2xl:w-auto max-w-full">
             {/* Category Filter Pills (All categories with count badges) */}
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1.5 sm:pb-0 scrollbar-none p-1.5 rounded-xl bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800/80 shadow-md max-w-full">
               {categories.map((cat) => {

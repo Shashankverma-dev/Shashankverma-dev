@@ -86,7 +86,7 @@ export function Navigation() {
         </a>
 
         {/* Desktop Navigation Link Nodes */}
-        <nav className="hidden md:flex items-center space-x-8 font-mono text-sm font-medium tracking-wide">
+        <nav className="hidden lg:flex items-center space-x-8 font-mono text-sm font-medium tracking-wide">
           {navLinks.map((link) => (
             <a
               key={link.label}
@@ -101,7 +101,7 @@ export function Navigation() {
         </nav>
 
         {/* Desktop Action Utilities (Theme, Socials) */}
-        <div className="hidden md:flex items-center space-x-5">
+        <div className="hidden lg:flex items-center space-x-5">
           <a
             href="https://github.com/Shashankverma-dev"
             target="_blank"
@@ -124,7 +124,7 @@ export function Navigation() {
         </div>
 
         {/* Mobile Toggle Trigger */}
-        <div className="md:hidden flex items-center space-x-3">
+        <div className="lg:hidden flex items-center space-x-3">
           <ThemeToggle />
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -141,10 +141,10 @@ export function Navigation() {
         <>
           <div 
             onClick={() => setIsOpen(false)}
-            className="md:hidden fixed inset-0 top-[65px] bg-black/40 backdrop-blur-xs z-40 transition-opacity" 
+            className="lg:hidden fixed inset-0 top-[65px] bg-black/40 backdrop-blur-xs z-40 transition-opacity" 
             aria-hidden="true"
           />
-          <div className="md:hidden fixed inset-x-0 top-[65px] z-50 bg-white/95 dark:bg-black/95 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 font-mono text-sm space-y-4 animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-65px)] overflow-y-auto">
+          <div className="lg:hidden fixed inset-x-0 top-[65px] z-50 bg-white/95 dark:bg-black/95 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 font-mono text-sm space-y-4 animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-65px)] overflow-y-auto">
             <nav className="flex flex-col space-y-1">
               {navLinks.map((link) => (
                 <a

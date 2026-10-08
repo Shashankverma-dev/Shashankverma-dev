@@ -6,6 +6,7 @@
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, monospace;
+  --font-handwriting: var(--font-handwriting), Caveat, cursive;
 
   --color-accent-cyan: #06b6d4;
   --color-accent-green: #10b981;
@@ -15,6 +16,14 @@
   --color-cyber-card: #0d0d0f;
   --color-cyber-border: #1a1a1f;
   --color-cyber-text: #ededed;
+}
+
+/* Workshop Pegboard Pattern */
+.pegboard-bg {
+  background-color: #0e0e10;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.92) 0px, rgba(0, 0, 0, 0.85) 3px, rgba(255, 255, 255, 0.06) 3.5px, rgba(255, 255, 255, 0.02) 4.5px, transparent 5px);
+  background-size: 34px 34px;
 }
 
 html, body {
